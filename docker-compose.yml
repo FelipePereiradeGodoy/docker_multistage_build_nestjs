@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: study-container-docker-nestjs-multi-stage-build
+    image: study-container_docker_nestjs_multi_stage_build:latest
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: npm run start:debug
+    ports:
+      - 3000:3000
+    networks:
+      - study-container-docker-nestjs-multi-stage-build-network
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: unless-stopped
+
+networks:
+  study-container-docker-nestjs-multi-stage-build-network:
